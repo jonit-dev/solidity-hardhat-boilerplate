@@ -4,7 +4,7 @@
   "editor.formatOnSave": true,
 
   "[solidity]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "NomicFoundation.hardhat-solidity"
   },
 
   "prettier.requireConfig": true,
