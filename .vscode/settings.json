@@ -1,3 +1,13 @@
 {
   "workbench.colorTheme": "Aura Dark",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  "[solidity]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "prettier.requireConfig": true,
+  "prettier.prettierPath": "./node_modules/prettier",
+  "prettier.configPath": ".prettierrc"
 }
