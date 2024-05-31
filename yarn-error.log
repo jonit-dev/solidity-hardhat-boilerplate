@@ -1,5 +1,5 @@
 Arguments: 
-  /home/jonit/.nvm/versions/node/v18.18.2/bin/node /mnt/c/Users/joao/AppData/Roaming/npm/node_modules/yarn/bin/yarn.js compile
+  /home/jonit/.nvm/versions/node/v18.18.2/bin/node /mnt/c/Users/joao/AppData/Roaming/npm/node_modules/yarn/bin/yarn.js add eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-solidity --dev
 
 PATH: 
   /home/jonit/.vscode-server/bin/dc96b837cf6bb4af9cd736aa3af08cf8279f7685/bin/remote-cli:/home/jonit/.nvm/versions/node/v18.18.2/bin:/home/jonit/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/dotnet/:/Docker/host/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files/nodejs/:/mnt/c/Users/joao/.cargo/bin:/mnt/c/Users/joao/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/joao/.dotnet/tools:/mnt/c/Users/joao/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/joao/AppData/Roaming/npm:/home/jonit/.foundry/bin:/home/jonit/.foundry/bin:/usr/lib/jvm/java-17-openjdk-amd64/bin:/usr/lib/android-sdk/cmdline-tools/cmdline-tools/bin:/usr/lib/android-sdk/platform-tools:/usr/local/go/bin:/home/jonit/go/bin:/home/jonit/.foundry/bin:/usr/lib/jvm/java-17-openjdk-amd64/bin:/usr/lib/android-sdk/cmdline-tools/cmdline-tools/bin:/usr/lib/android-sdk/platform-tools:/usr/local/go/bin:/home/jonit/go/bin
@@ -14,12 +14,17 @@ Platform:
   linux x64
 
 Trace: 
-  SyntaxError: /home/jonit/personal-projects/hardhat-solidity-boilerplate/package.json: Unexpected string in JSON at position 371
-      at JSON.parse (<anonymous>)
-      at /mnt/c/Users/joao/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:1629:59
-      at Generator.next (<anonymous>)
-      at step (/mnt/c/Users/joao/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:310:30)
-      at /mnt/c/Users/joao/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:321:13
+  Error: https://registry.yarnpkg.com/eslint-plugin-solidity: Not found
+      at params.callback [as _callback] (/mnt/c/Users/joao/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:66145:18)
+      at self.callback (/mnt/c/Users/joao/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:140890:22)
+      at Request.emit (node:events:517:28)
+      at Request.<anonymous> (/mnt/c/Users/joao/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:141862:10)
+      at Request.emit (node:events:517:28)
+      at IncomingMessage.<anonymous> (/mnt/c/Users/joao/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:141784:12)
+      at Object.onceWrapper (node:events:631:28)
+      at IncomingMessage.emit (node:events:529:35)
+      at endReadableNT (node:internal/streams/readable:1368:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
 
 npm manifest: 
   {
@@ -29,13 +34,18 @@ npm manifest:
     "author": "Joao Paulo Furtado",
     "license": "MIT",
     "scripts": {
-      "compile": "hardhat compile",
+      "compile": "hardhat compile && yarn typechain",
       "test": "hardhat test",
       "coverage": "hardhat coverage",
       "typechain": "hardhat typechain",
       "verify": "hardhat verify",
-      "task:accounts": "hardhat accounts"
-    }
+      "task:accounts": "hardhat accounts",
+      "clean": "hardhat clean",
+      "console": "hardhat console",
+      "deploy": "hardhat run scripts/deploy.ts",
+      "lint": "npx eslint '**/*.sol' '**/*.ts' --fix",
+      "format": "prettier --write '**/*.sol' '**/*.ts'"
+    },
     "devDependencies": {
       "@chainlink/contracts": "0.8.0",
       "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
