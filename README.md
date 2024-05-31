@@ -29,7 +29,7 @@ To ensure a smooth development experience, install the following Visual Studio C
 
 Here's the focused `README.md` with a clean Hardhat 101 crash course:
 
-## Hardhat 101: Getting Started
+## Hardhat 101: Getting Started ss
 
 ### 1. Initialize the Hardhat Project
 
@@ -144,4 +144,3 @@ REPORT_GAS=true npx hardhat test
 npx hardhat node
 npx hardhat ignition deploy ./ignition/modules/Lock.ts
 ```
-

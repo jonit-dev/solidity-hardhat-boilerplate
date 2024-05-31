@@ -9,5 +9,6 @@
 
   "prettier.requireConfig": true,
   "prettier.prettierPath": "./node_modules/prettier",
-  "prettier.configPath": ".prettierrc"
+  "prettier.configPath": ".prettierrc",
+  "cSpell.words": ["Nomic"]
 }
