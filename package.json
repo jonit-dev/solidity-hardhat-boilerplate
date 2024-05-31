@@ -4,6 +4,17 @@
   "main": "index.js",
   "author": "Joao Paulo Furtado",
   "license": "MIT",
+  "scripts": {
+    "compile": "hardhat compile && yarn typechain",
+    "test": "hardhat test",
+    "coverage": "hardhat coverage",
+    "typechain": "hardhat typechain",
+    "verify": "hardhat verify",
+    "task:accounts": "hardhat accounts",
+    "clean": "hardhat clean",
+    "console": "hardhat console",
+    "deploy": "hardhat run scripts/deploy.js"
+  },
   "devDependencies": {
     "@chainlink/contracts": "0.8.0",
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
