@@ -13,7 +13,7 @@ async function main() {
 
   console.log("Contract deployed to: ", contractAddress);
 
-  if (network.name !== "hardhat") {
+  if (network.name === "sepolia") {
     const verified = await hasVerified(contractAddress, ["2"], network.name);
 
     if (!verified) {
