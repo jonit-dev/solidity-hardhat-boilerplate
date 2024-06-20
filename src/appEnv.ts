@@ -47,4 +47,7 @@ export const appEnv = {
       },
     },
   },
+  other: {
+    etherscanApiKey: process.env.ETHERSCAN_API_KEY,
+  },
 };

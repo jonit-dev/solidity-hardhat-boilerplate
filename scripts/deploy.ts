@@ -1,4 +1,4 @@
-import { ethers } from "hardhat";
+import { ethers, network, run } from "hardhat";
 
 async function main() {
   const SimpleStorageFactory = await ethers.getContractFactory("SimpleStorage");
@@ -9,7 +9,45 @@ async function main() {
 
   const result = await simpleStorage.waitForDeployment();
 
-  console.log("Contract deployed to: ", await result.getAddress());
+  const contractAddress = await result.getAddress();
+
+  console.log("Contract deployed to: ", contractAddress);
+
+  if (network.name !== "hardhat") {
+    const verified = await hasVerified(contractAddress, ["2"], network.name);
+
+    if (!verified) {
+      return;
+    }
+  }
+}
+
+async function hasVerified(
+  contractAddress: string,
+  args: string[],
+  network: string = "sepolia",
+): Promise<boolean> {
+  console.log(`Verifying contract at address ${contractAddress}`);
+
+  try {
+    await run("verify:verify", {
+      address: contractAddress,
+      constructorArguments: args,
+      network,
+    });
+    console.log("✅ Contract verified successfully");
+
+    return true;
+  } catch (error) {
+    if (error.message.toLowerCase().includes("already verified")) {
+      console.log("✅ Contract already verified");
+      return true;
+    }
+
+    console.error("❌ Contract verification failed:", error);
+
+    return false;
+  }
 }
 
 main()
