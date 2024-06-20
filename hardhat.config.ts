@@ -13,6 +13,7 @@ const config: HardhatUserConfig = {
       accounts: [appEnv.accounts.testNet.sepolia.privateKey!],
     },
     localhost: {
+      // first run yarn hardhat node to start a local node, then run yarn hardhat run scripts/deploy.ts --network localhost
       url: "http://127.0.0.1:8545",
       accounts: {
         mnemonic: "test test test test test test test test test test test junk",
