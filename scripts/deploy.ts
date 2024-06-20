@@ -13,6 +13,8 @@ async function main() {
 
   console.log("Contract deployed to: ", contractAddress);
 
+  await waitForBlocksMined(network.name === "sepolia" ? 3 : 12);
+
   if (network.name === "sepolia") {
     const verified = await hasVerified(contractAddress, ["2"], network.name);
 
@@ -20,6 +22,30 @@ async function main() {
       return;
     }
   }
+}
+
+async function waitForBlocksMined(blocksToWait: number): Promise<void> {
+  const provider = ethers.provider;
+  const startBlock = await provider.getBlockNumber();
+  const targetBlock = startBlock + blocksToWait;
+
+  console.log(
+    `Waiting for ${blocksToWait} blocks to be mined... Current block: ${startBlock}`,
+  );
+
+  while ((await provider.getBlockNumber()) < targetBlock) {
+    const currentBlock = await provider.getBlockNumber();
+    const blocksMined = currentBlock - startBlock;
+    const progress = (blocksMined / blocksToWait) * 100;
+    console.log(
+      `Current block: ${currentBlock} - Progress: ${progress.toFixed(2)}%`,
+    );
+    await new Promise((resolve) => setTimeout(resolve, 6000)); // Wait for 1 second before checking again
+  }
+
+  console.log(
+    `${blocksToWait} blocks have been mined. Current block: ${await provider.getBlockNumber()}`,
+  );
 }
 
 async function hasVerified(
