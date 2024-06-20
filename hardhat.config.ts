@@ -12,6 +12,13 @@ const config: HardhatUserConfig = {
       url: appEnv.testNet.infura.rpcUrl,
       accounts: [appEnv.accounts.testNet.sepolia.privateKey!],
     },
+    localhost: {
+      url: "http://127.0.0.1:8545",
+      accounts: {
+        mnemonic: "test test test test test test test test test test test junk",
+        accountsBalance: "1000000000000000000000", // 1000 ETH
+      },
+    },
   },
   etherscan: {
     apiKey: appEnv.other.etherscanApiKey,

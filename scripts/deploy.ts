@@ -13,9 +13,9 @@ async function main() {
 
   console.log("Contract deployed to: ", contractAddress);
 
-  await waitForBlocksMined(network.name === "sepolia" ? 3 : 12);
+  if (network.name === "sepolia" || network.name === "mainnet") {
+    await waitForBlocksMined(network.name === "sepolia" ? 3 : 12);
 
-  if (network.name === "sepolia") {
     const verified = await hasVerified(contractAddress, ["2"], network.name);
 
     if (!verified) {
