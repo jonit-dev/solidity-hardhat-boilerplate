@@ -3,6 +3,7 @@ import "@nomicfoundation/hardhat-verify";
 import "dotenv/config";
 import { HardhatUserConfig } from "hardhat/config";
 import { appEnv } from "./src/appEnv";
+import "./tasks/blockNumber";
 
 const config: HardhatUserConfig = {
   solidity: "0.8.24",
