@@ -7,3 +7,5 @@ package-lock.json
 
 artifacts
 cache
+ignition/deployments
+typechain-types

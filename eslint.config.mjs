@@ -8,33 +8,74 @@ export default [
   js.configs.recommended,
   {
     ignores: [
-      "node_modules/",
-      "dist/",
-      "artifacts/",
-      "cache/",
-      "hardhat.config.ts",
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/artifacts/**",
+      "**/cache/**",
+      "**/typechain-types/**",
+      "**/coverage/**",
+      "**/ignition/deployments/**",
     ],
-    files: ["*.ts", "*.tsx"],
+  },
+  {
+    files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
       parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2022,
+        sourceType: "module",
+        project: "./tsconfig.json",
+      },
+      globals: {
+        // Node.js globals
+        process: true,
+        module: true,
+        require: true,
+        __dirname: true,
+        __filename: true,
+        exports: true,
+        console: true,
+        setTimeout: true,
+        clearTimeout: true,
+        setInterval: true,
+        clearInterval: true,
+        Buffer: true,
+        // ES2022 globals
+        Promise: true,
+        Map: true,
+        Set: true,
+        WeakMap: true,
+        WeakSet: true,
+        Proxy: true,
+        Reflect: true,
+        globalThis: true,
+      },
+    },
+    linterOptions: {
+      reportUnusedDisableDirectives: true,
+    },
+    settings: {
+      node: {
+        tryExtensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".node"],
+      },
     },
     plugins: {
       "@typescript-eslint": ts,
     },
     rules: {
-      indent: ["error", 2], // Enforces a 2-space indent
-      quotes: ["error", "single"], // Enforces single quotes
-      semi: ["error", "always"], // Enforces semicolons
-      "no-unused-vars": "warn", // Warns about unused variables
-      "no-console": "warn", // Warns about console.log statements
-      eqeqeq: ["error", "always"], // Enforces the use of === and !==
-      curly: ["error", "all"], // Enforces consistent brace style for all control statements
-      "@typescript-eslint/no-explicit-any": "warn", // Warns about the use of 'any' type
-      "@typescript-eslint/explicit-function-return-type": "off", // Disables explicit return types on functions
+      indent: ["error", 2],
+      quotes: "off",
+      semi: ["error", "always"],
+      "no-unused-vars": "off",
+      "no-console": "off",
+      eqeqeq: ["error", "always"],
+      curly: ["error", "all"],
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-unused-vars": [
         "warn",
         { argsIgnorePattern: "^_" },
-      ], // Ignores unused variables that start with an underscore
+      ],
     },
   },
 ];
