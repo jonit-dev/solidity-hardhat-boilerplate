@@ -1,1 +1,31 @@
-yarn format && yarn lint
+echo "🔍 Running pre-push checks..."
+
+# Run format check without modifying files
+echo "📝 Checking code formatting..."
+yarn format:check || {
+    echo "❌ Format check failed. Run 'yarn format' to fix formatting issues"
+    exit 1
+}
+
+# Run linting
+echo "🔎 Running linters..."
+yarn lint || {zz
+    echo "❌ Linting failed. Fix the issues and try again"
+    exit 1
+}
+
+# Compile contracts and check types
+echo "🛠️ Compiling contracts and checking types..."
+yarn compile || {
+    echo "❌ Compilation failed. Fix the errors and try again"
+    exit 1
+}
+
+# Run tests with coverage
+echo "🧪 Running tests..."
+yarn test || {
+    echo "❌ Tests failed. Fix the failing tests and try again"
+    exit 1
+}
+
+echo "✅ All checks passed! Pushing changes..."

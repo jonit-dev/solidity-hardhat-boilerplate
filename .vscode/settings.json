@@ -10,5 +10,6 @@
   "prettier.requireConfig": true,
   "prettier.prettierPath": "./node_modules/prettier",
   "prettier.configPath": ".prettierrc",
-  "cSpell.words": ["Nomic"]
+  "cSpell.words": ["Nomic"],
+  "workbench.activityBar.orientation": "vertical"
 }

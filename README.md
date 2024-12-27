@@ -1,146 +1,125 @@
 # Hardhat x Solidity Boilerplate
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+A modern Solidity development environment using Hardhat, TypeScript, and the latest tools in the ecosystem.
 
-## Prerequisites
+## Tech Stack
 
-Before you begin, ensure you have the following installed:
+- **Solidity**
+- **Hardhat**
+- **TypeScript**
+- **Ethers.js**
+- **OpenZeppelin**
+- **Chainlink**
 
-- Node.js (>=12.x)
-- Yarn or npm
-- Visual Studio Code (recommended)
+## Project Structure
 
-## Setup
+```
+├── contracts/               # Smart contracts
+│   └── SimpleStorage.sol    # Example storage contract
+├── scripts/                 # Deployment and interaction scripts
+│   └── deploy.ts           # Manual deployment script
+├── ignition/               # Hardhat Ignition deployment system
+│   └── modules/            # Deployment modules
+│       └── SimpleStorage.ts # Automated deployment configuration
+├── tasks/                  # Custom Hardhat tasks
+│   └── blockNumber.ts      # Example task
+└── test/                   # Test files
+```
 
-### 1. Install Dependencies
+## Main Application Flow
 
-Install the necessary dependencies by running:
+1. **Contract Deployment**:
+   - Two deployment options available:
+     - Using Hardhat Ignition (Recommended): `yarn deploy`
+     - Using traditional script: `yarn deploy:simple`
+   - Ignition provides a declarative deployment system with better state management
 
-```shell
+2. **Contract Verification**:
+   - Automatic verification on Etherscan after deployment
+   - Configurable for different networks (currently set up for Sepolia)
+   - Run manually with: `yarn verify`
+
+3. **Development Workflow**:
+   - Write contracts in `contracts/`
+   - Compile with `yarn compile`
+   - Test with `yarn test`
+   - Check coverage with `yarn coverage`
+
+4. **Code Quality**:
+   - TypeScript for type safety
+   - Prettier for code formatting: `yarn format`
+   - ESLint for TypeScript: `yarn lint:ts`
+   - Solhint for Solidity: `yarn lint:sol`
+   - Git hooks via Husky for pre-commit checks
+
+## Getting Started
+
+1. **Install Dependencies**:
+```bash
 yarn install
 ```
 
-### 2. VS Code Extensions
+2. **Environment Setup**:
+   - Copy `.env.example` to `.env`
+   - Fill in your environment variables:
+     - `INFURA_API_KEY`
+     - `ETHERSCAN_API_KEY`
+     - `PRIVATE_KEY` (for deployments)
 
-To ensure a smooth development experience, install the following Visual Studio Code extensions:
-
-- [Nomic Foundation Hardhat Solidity](https://marketplace.visualstudio.com/items?itemName=NomicFoundation.hardhat-solidity)
-- [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-
-Here's the focused `README.md` with a clean Hardhat 101 crash course:
-
-## Hardhat 101: Getting Started
-
-### 1. Initialize the Hardhat Project
-
-If you haven't already, initialize your Hardhat project by running:
-
-```shell
-npx hardhat
+3. **Compile Contracts**:
+```bash
+yarn compile
 ```
 
-Follow the prompts to create a basic sample project.
-
-### 2. Directory Structure
-
-A typical Hardhat project includes the following directories and files:
-
-- `contracts/`: Contains your Solidity smart contracts.
-- `scripts/`: Contains scripts for deploying and interacting with your contracts.
-- `test/`: Contains your test files.
-- `hardhat.config.js`: Hardhat configuration file.
-
-### 3. Writing Your First Contract
-
-Create a new Solidity file in the `contracts` directory, for example, `MyContract.sol`:
-
-```solidity
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
-contract MyContract {
-    string public greet = "Hello, Hardhat!";
-}
+4. **Run Tests**:
+```bash
+yarn test
 ```
 
-### 4. Compiling Your Contract
+5. **Deploy**:
+```bash
+# Using Ignition (recommended)
+yarn deploy
 
-Compile your contract by running:
-
-```shell
-npx hardhat compile
+# Using traditional script
+yarn deploy:simple
 ```
 
-### 5. Writing Tests
+## Available Scripts
 
-Create a test file in the `test` directory, for example, `MyContract.js`:
+- `yarn compile`: Compile contracts and generate TypeChain types
+- `yarn test`: Run tests
+- `yarn coverage`: Generate test coverage report
+- `yarn deploy`: Deploy using Hardhat Ignition
+- `yarn deploy:simple`: Deploy using traditional script
+- `yarn verify`: Verify contracts on Etherscan
+- `yarn format`: Format all code
+- `yarn lint`: Run all linters
+- `yarn lint:fix`: Fix linting issues
 
-```javascript
-const { expect } = require("chai");
+## Network Support
 
-describe("MyContract", function () {
-  it("Should return the correct greeting", async function () {
-    const MyContract = await ethers.getContractFactory("MyContract");
-    const myContract = await MyContract.deploy();
-    await myContract.deployed();
+The project is configured for:
+- Local development network
+- Sepolia testnet
+- Mainnet (configuration ready)
 
-    expect(await myContract.greet()).to.equal("Hello, Hardhat!");
-  });
-});
-```
+## Security Features
 
-Run your tests with:
+- OpenZeppelin contracts for battle-tested implementations
+- Solidity 0.8.24 with built-in overflow checks
+- Comprehensive test coverage requirements
+- Multiple linters and formatters
+- TypeScript for type safety
 
-```shell
-npx hardhat test
-```
+## Contributing
 
-### 6. Deploying Your Contract
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
 
-Create a deployment script in the `scripts` directory, for example, `deploy.js`:
+## License
 
-```javascript
-async function main() {
-  const MyContract = await ethers.getContractFactory("MyContract");
-  const myContract = await MyContract.deploy();
-
-  console.log("Contract deployed to address:", myContract.address);
-}
-
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
-```
-
-Deploy your contract with:
-
-```shell
-npx hardhat run scripts/deploy.js
-```
-
-### 7. Running a Local Blockchain
-
-To run a local blockchain for development, use:
-
-```shell
-npx hardhat node
-```
-
-### 8. Interacting with the Contract
-
-Once your local blockchain is running, you can interact with your deployed contracts using scripts or the Hardhat console.
-
-### Hardhat Basics
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.ts
-```
+MIT
